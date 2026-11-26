@@ -1,0 +1,373 @@
+{
+  "version": 4,
+  "name": "ڕۆحی شمشێر",
+  "entities": [
+    {
+      "id": 0,
+      "name": "Camera",
+      "parent": null,
+      "children": [],
+      "visible": true,
+      "components": [
+        {
+          "type": "Transform",
+          "data": {
+            "position": { "x": 0, "y": 11, "z": 24 },
+            "rotation": { "x": -0.18, "y": 0, "z": 0, "w": 0.98 }
+          }
+        },
+        {
+          "type": "Camera",
+          "data": {
+            "projectionType": 0,
+            "fov": 55,
+            "nearPlane": 0.1,
+            "farPlane": 4000,
+            "isActive": true,
+            "priority": 0,
+            "clearFlags": 1
+          }
+        },
+        {
+          "type": "PostProcessVolume",
+          "data": {
+            "isGlobal": true,
+            "weight": 1,
+            "priority": 0,
+            "effects": [
+              {
+                "type": "heightFog",
+                "enabled": true,
+                "uniforms": {
+                  "u_density": 0.0016,
+                  "u_heightFalloff": 0.01,
+                  "u_baseHeight": 0,
+                  "u_startDistance": 30,
+                  "u_maxOpacity": 0.55,
+                  "u_inscatter": 0,
+                  "u_skyFog": 0.2,
+                  "u_volumetric": 0
+                },
+                "colors": {
+                  "u_fogColor": { "r": 0.42, "g": 0.5, "b": 0.62, "a": 1 }
+                }
+              },
+              {
+                "type": "bloom",
+                "enabled": true,
+                "uniforms": { "u_threshold": 0.85, "u_intensity": 0.55, "u_radius": 1 }
+              },
+              {
+                "type": "colorGrade",
+                "enabled": true,
+                "uniforms": { "u_exposure": 0.05, "u_contrast": 1.08, "u_saturation": 1.05, "u_tintR": 1, "u_tintG": 0.98, "u_tintB": 1.06 }
+              },
+              {
+                "type": "vignette",
+                "enabled": true,
+                "uniforms": { "u_intensity": 0.22, "u_softness": 0.85 }
+              },
+              {
+                "type": "fxaa",
+                "enabled": true,
+                "uniforms": {}
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "name": "Sun",
+      "parent": null,
+      "children": [],
+      "visible": true,
+      "components": [
+        {
+          "type": "Transform",
+          "data": {
+            "position": { "x": 40, "y": 60, "z": 20 },
+            "rotation": { "x": -0.5, "y": 0.4, "z": 0, "w": 0.85 }
+          }
+        },
+        {
+          "type": "Light",
+          "data": {
+            "type": 0,
+            "color": { "r": 1, "g": 0.82, "b": 0.62, "a": 1 },
+            "intensity": 2.4,
+            "enabled": true
+          }
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Ambient",
+      "parent": null,
+      "children": [],
+      "visible": true,
+      "components": [
+        {
+          "type": "Transform",
+          "data": {}
+        },
+        {
+          "type": "Light",
+          "data": {
+            "type": 2,
+            "color": { "r": 0.55, "g": 0.66, "b": 0.82, "a": 1 },
+            "intensity": 1.25,
+            "enabled": true,
+            "drawEnvironment": false
+          }
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Ground",
+      "parent": null,
+      "children": [],
+      "visible": true,
+      "components": [
+        {
+          "type": "Transform",
+          "data": {
+            "position": { "x": 0, "y": 0, "z": 0 },
+            "rotation": { "x": 0, "y": 0, "z": 0, "w": 1 },
+            "scale": { "x": 400, "y": 1, "z": 400 }
+          }
+        },
+        {
+          "type": "MeshRenderer",
+          "data": {
+            "mesh": "builtin:plane",
+            "lit": true,
+            "color": { "r": 0.16, "g": 0.2, "b": 0.26, "a": 1 },
+            "opaque": true,
+            "enabled": true
+          }
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "name": "Sky",
+      "parent": null,
+      "children": [],
+      "visible": true,
+      "components": [
+        {
+          "type": "Transform",
+          "data": {
+            "position": { "x": 0, "y": 0, "z": 0 },
+            "rotation": { "x": 0, "y": 0, "z": 0, "w": 1 },
+            "scale": { "x": 600, "y": 600, "z": 600 }
+          }
+        },
+        {
+          "type": "MeshRenderer",
+          "data": {
+            "mesh": "builtin:sphere",
+            "lit": false,
+            "texture": "assets/textures/donghua_bg.png",
+            "color": { "r": 1, "g": 1, "b": 1, "a": 1 },
+            "opaque": true,
+            "enabled": true
+          }
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "name": "HUD",
+      "parent": null,
+      "children": [6, 7, 8, 9, 10, 11],
+      "visible": true,
+      "components": [
+        { "type": "Transform", "data": {} },
+        { "type": "Canvas", "data": {} },
+        {
+          "type": "UINode",
+          "data": {
+            "insetLeft": { "unit": 0, "value": 0 },
+            "insetTop": { "unit": 0, "value": 0 },
+            "width": { "unit": 0, "value": 1280 },
+            "height": { "unit": 0, "value": 720 },
+            "display": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "name": "HP",
+      "parent": 5,
+      "children": [],
+      "visible": true,
+      "components": [
+        { "type": "Transform", "data": {} },
+        {
+          "type": "UINode",
+          "data": {
+            "insetLeft": { "unit": 0, "value": 28 },
+            "insetTop": { "unit": 0, "value": 24 },
+            "width": { "unit": 0, "value": 320 },
+            "height": { "unit": 0, "value": 40 },
+            "display": 1
+          }
+        },
+        {
+          "type": "Text",
+          "data": {
+            "content": "ڕۆح: 100",
+            "color": { "r": 0.55, "g": 1, "b": 0.78, "a": 1 },
+            "fontSize": 30
+          }
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "name": "Qi",
+      "parent": 5,
+      "children": [],
+      "visible": true,
+      "components": [
+        { "type": "Transform", "data": {} },
+        {
+          "type": "UINode",
+          "data": {
+            "insetLeft": { "unit": 0, "value": 28 },
+            "insetTop": { "unit": 0, "value": 64 },
+            "width": { "unit": 0, "value": 360 },
+            "height": { "unit": 0, "value": 40 },
+            "display": 1
+          }
+        },
+        {
+          "type": "Text",
+          "data": {
+            "content": "تۆزی ڕۆح: 0",
+            "color": { "r": 1, "g": 0.85, "b": 0.4, "a": 1 },
+            "fontSize": 30
+          }
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "name": "Realm",
+      "parent": 5,
+      "children": [],
+      "visible": true,
+      "components": [
+        { "type": "Transform", "data": {} },
+        {
+          "type": "UINode",
+          "data": {
+            "insetLeft": { "unit": 0, "value": 28 },
+            "insetTop": { "unit": 0, "value": 104 },
+            "width": { "unit": 0, "value": 360 },
+            "height": { "unit": 0, "value": 40 },
+            "display": 1
+          }
+        },
+        {
+          "type": "Text",
+          "data": {
+            "content": "پلە: 练气 Qi Refining",
+            "color": { "r": 0.7, "g": 0.85, "b": 1, "a": 1 },
+            "fontSize": 26
+          }
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "name": "Wave",
+      "parent": 5,
+      "children": [],
+      "visible": true,
+      "components": [
+        { "type": "Transform", "data": {} },
+        {
+          "type": "UINode",
+          "data": {
+            "insetLeft": { "unit": 0, "value": 980 },
+            "insetTop": { "unit": 0, "value": 24 },
+            "width": { "unit": 0, "value": 280 },
+            "height": { "unit": 0, "value": 40 },
+            "display": 1
+          }
+        },
+        {
+          "type": "Text",
+          "data": {
+            "content": "قۆناغ: 1",
+            "color": { "r": 1, "g": 1, "b": 1, "a": 1 },
+            "fontSize": 28
+          }
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "name": "Message",
+      "parent": 5,
+      "children": [],
+      "visible": true,
+      "components": [
+        { "type": "Transform", "data": {} },
+        {
+          "type": "UINode",
+          "data": {
+            "insetLeft": { "unit": 0, "value": 340 },
+            "insetTop": { "unit": 0, "value": 320 },
+            "width": { "unit": 0, "value": 600 },
+            "height": { "unit": 0, "value": 80 },
+            "display": 1
+          }
+        },
+        {
+          "type": "Text",
+          "data": {
+            "content": "",
+            "color": { "r": 1, "g": 0.92, "b": 0.7, "a": 1 },
+            "fontSize": 40
+          }
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "name": "Title",
+      "parent": 5,
+      "children": [],
+      "visible": true,
+      "components": [
+        { "type": "Transform", "data": {} },
+        {
+          "type": "UINode",
+          "data": {
+            "insetLeft": { "unit": 0, "value": 340 },
+            "insetTop": { "unit": 0, "value": 250 },
+            "width": { "unit": 0, "value": 600 },
+            "height": { "unit": 0, "value": 60 },
+            "display": 1
+          }
+        },
+        {
+          "type": "Text",
+          "data": {
+            "content": "ڕۆحی شمشێر · Sword Spirit",
+            "color": { "r": 1, "g": 0.86, "b": 0.5, "a": 1 },
+            "fontSize": 46
+          }
+        }
+      ]
+    }
+  ]
+}
