@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ku">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ڕۆحی شمشێر · Sword Spirit</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { width: 100%; height: 100%; overflow: hidden; background: #0b1020; }
+    #app { position: fixed; inset: 0; }
+    canvas { display: block; }
+
+    /* HUD */
+    #hud {
+      position: fixed; inset: 0; pointer-events: none;
+      font-family: "Noto Sans Arabic", "Segoe UI", system-ui, sans-serif;
+      color: #eaf2ff; text-shadow: 0 2px 8px rgba(0,0,0,.6);
+    }
+    .panel { position: absolute; padding: 10px 16px; }
+    #hp    { top: 20px; left: 24px;  font-size: 26px; color: #8cffc8; }
+    #qi    { top: 58px; left: 24px;  font-size: 22px; color: #ffd86b; }
+    #realm { top: 94px; left: 24px;  font-size: 20px; color: #b9d4ff; }
+    #wave  { top: 20px; right: 24px; font-size: 24px; text-align: right; }
+    #message {
+      top: 44%; left: 0; right: 0; text-align: center;
+      font-size: 38px; color: #ffe9a8; min-height: 48px;
+    }
+    #title {
+      top: 36%; left: 0; right: 0; text-align: center;
+      font-size: 52px; color: #ffdc8a; letter-spacing: 2px;
+    }
+    #hint {
+      bottom: 26px; left: 0; right: 0; text-align: center;
+      font-size: 18px; color: #cfd9ee; opacity: .85;
+    }
+    #touch-controls { display: none; position: fixed; inset: 0; pointer-events: none; font-family: system-ui, sans-serif; }
+    .pad, .actions { position: absolute; bottom: max(18px, env(safe-area-inset-bottom)); pointer-events: auto; }
+    .pad { left: 18px; display: grid; grid-template-columns: repeat(3, 48px); grid-template-rows: repeat(2, 48px); gap: 5px; }
+    .actions { right: 18px; display: flex; align-items: end; gap: 8px; }
+    #touch-controls button { touch-action: none; user-select: none; -webkit-user-select: none; color: #ecf9ff; background: rgba(14,32,50,.72); border: 1px solid rgba(139,224,226,.65); border-radius: 14px; font-size: 19px; min-width: 48px; min-height: 48px; }
+    #touch-controls button.pressed { background: rgba(67,155,153,.8); }
+    #action { padding: 0 16px; height: 58px; }
+    @media (pointer: coarse) {
+      #touch-controls { display: block; }
+      #hint { bottom: 128px; padding: 0 15px; font-size: 13px; }
+      #title { font-size: clamp(25px, 6vw, 48px); }
+      #message { font-size: clamp(21px, 5vw, 38px); }
+      #hp, #wave { top: 8px; font-size: 17px; }
+      #hp, #qi, #realm { left: 8px; }
+      #qi { top: 40px; font-size: 15px; }
+      #realm { top: 65px; font-size: 14px; }
+      #wave { right: 8px; }
+      .panel { padding: 5px 8px; }
+      .bar { width: 150px; }
+    }
+    .bar { height: 8px; border-radius: 4px; background: rgba(255,255,255,.15); margin-top: 4px; width: 280px; overflow: hidden; }
+    .bar > i { display: block; height: 100%; background: linear-gradient(90deg,#5be0ff,#8cffc8); width: 100%; transition: width .15s; }
+    #hpbar > i { background: linear-gradient(90deg,#ff6b6b,#ffd86b); }
+  </style>
+  <script type="importmap">
+  { "imports": { "three": "/web/vendor/three.module.js" } }
+  </script>
+</head>
+<body>
+  <div id="app"></div>
+  <div id="hud">
+    <div id="hp" class="panel">ڕۆح: 100<div class="bar" id="hpbar"><i></i></div></div>
+    <div id="qi"   class="panel">تۆزی ڕۆح: 0 · خاڵ: 0</div>
+    <div id="realm" class="panel">پلە: 练气 · Qi Refining</div>
+    <div id="wave" class="panel">قۆناغ: 1</div>
+    <div id="title" class="panel">ڕۆحی شمشێر · Sword Spirit</div>
+    <div id="message" class="panel"></div>
+    <div id="hint" class="panel">WASD / تیرەکان: فڕین · Shift: خێرایی · Space: تیشکی شمشێر · R: دووبارە — بۆ دەستپێک Space دگرە</div>
+  </div>
+  <div id="touch-controls" aria-label="کۆنترۆڵی یاری">
+    <div class="pad">
+      <span></span><button data-key="ArrowUp" aria-label="بەرەو پێش">▲</button><span></span>
+      <button data-key="ArrowLeft" aria-label="چەپ">◀</button><button data-key="ArrowDown" aria-label="دواوە">▼</button><button data-key="ArrowRight" aria-label="ڕاست">▶</button>
+    </div>
+    <div class="actions"><button data-key="ShiftLeft">خێرا</button><button id="action" data-key="Space">دەستپێک</button></div>
+  </div>
+  <script type="module" src="/web/game.js"></script>
+</body>
+</html>

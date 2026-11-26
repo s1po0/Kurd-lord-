@@ -1,0 +1,19 @@
+{
+  "formatVersion": "1",
+  "name": "ڕۆحی شمشێر · Sword Spirit",
+  "description": "A 3D Donghua-themed action game. Built with the Estrella engine; 3D assets authored in Kiln; art direction per the awesome-gamedev-agent-skills workflow.",
+  "tag": "3D",
+  "version": "0.1.0",
+  "defaultScene": "assets/scenes/main.esscene",
+  "designResolution": { "width": 1280, "height": 720 },
+  "spineVersion": "none",
+  "scripts": { "main": "src/main.ts" },
+  "assetExclude": ["kiln-assets", "tools"],
+  "features": {
+    "rendering": {
+      "colorSpace": "linear",
+      "outputTransform": "aces",
+      "quality": { "mode": "high" }
+    }
+  }
+}
